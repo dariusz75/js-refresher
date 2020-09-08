@@ -1,27 +1,22 @@
 const todos = [
   {
     title: "Order cat food",
-    body: "body 1",
     completed: false,
   },
   {
     title: "Clean kitchen",
-    body: "body 2",
     completed: true,
   },
   {
     title: "Buy food",
-    body: "body 3",
     completed: true,
   },
   {
     title: "Do work",
-    body: "body 4",
     completed: false,
   },
   {
     title: "Exercise",
-    body: "body 5",
     completed: true,
   },
 ];
@@ -54,23 +49,20 @@ const renderTodos = function (todos, filters) {
 
 renderTodos(todos, filters);
 
-// todos.forEach(function (todo) {
-//   let p = document.createElement("p");
-//   p.textContent = todo.title;
-//   document.querySelector("body").appendChild(p);
-// });
-
-document.querySelector("#add-todo").addEventListener("click", function (e) {
-  e.target.textContent = "Todo added";
-});
-
-document
-  .querySelector("#new-todo-text")
-  .addEventListener("input", function (e) {
-    //cosole.log(e.target.value);
-  });
-
 document.querySelector("#search-text").addEventListener("input", function (e) {
   filters.searchText = e.target.value;
   renderTodos(todos, filters);
+});
+
+document.querySelector("#new-todo").addEventListener("submit", function (e) {
+  e.preventDefault();
+  if (e.target.elements.newTodoText.value.length > 0) {
+    todos.push({
+      title: e.target.elements.newTodoText.value,
+      completed: false,
+    });
+  }
+
+  renderTodos(todos, filters);
+  e.target.elements.newTodoText.value = "";
 });
