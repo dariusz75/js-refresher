@@ -23,11 +23,21 @@ const todos = [
 
 const filters = {
   searchText: "",
+  hideCompleted: false,
 };
 
 const renderTodos = function (todos, filters) {
   const filteredTodos = todos.filter(function (todo) {
-    return todo.title.toLowerCase().includes(filters.searchText.toLowerCase());
+    if (filters.hideCompleted === true && todo.completed === false) {
+      console.log("filters.hideCompleted is:", filters.hideCompleted);
+      return todo.title
+        .toLowerCase()
+        .includes(filters.searchText.toLowerCase());
+    } else if (filters.hideCompleted === false) {
+      return todo.title
+        .toLowerCase()
+        .includes(filters.searchText.toLowerCase());
+    }
   });
 
   const incompleteTodos = filteredTodos.filter(function (todo) {
@@ -66,3 +76,10 @@ document.querySelector("#new-todo").addEventListener("submit", function (e) {
   renderTodos(todos, filters);
   e.target.elements.newTodoText.value = "";
 });
+
+document
+  .querySelector("#hide-completed")
+  .addEventListener("change", function (e) {
+    filters.hideCompleted = e.target.checked;
+    renderTodos(todos, filters);
+  });
