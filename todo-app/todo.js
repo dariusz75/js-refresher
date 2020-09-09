@@ -1,25 +1,33 @@
-const todos = [
-  {
-    title: "Order cat food",
-    completed: false,
-  },
-  {
-    title: "Clean kitchen",
-    completed: true,
-  },
-  {
-    title: "Buy food",
-    completed: true,
-  },
-  {
-    title: "Do work",
-    completed: false,
-  },
-  {
-    title: "Exercise",
-    completed: true,
-  },
-];
+// const todos = [
+//   {
+//     title: "Order cat food",
+//     completed: false,
+//   },
+//   {
+//     title: "Clean kitchen",
+//     completed: true,
+//   },
+//   {
+//     title: "Buy food",
+//     completed: true,
+//   },
+//   {
+//     title: "Do work",
+//     completed: false,
+//   },
+//   {
+//     title: "Exercise",
+//     completed: true,
+//   },
+// ];
+
+let todos = [];
+
+let todosJSON = localStorage.getItem("todos");
+
+if (todosJSON !== null) {
+  todos = JSON.parse(todosJSON);
+}
 
 const filters = {
   searchText: "",
@@ -29,7 +37,6 @@ const filters = {
 const renderTodos = function (todos, filters) {
   const filteredTodos = todos.filter(function (todo) {
     if (filters.hideCompleted === true && todo.completed === false) {
-      console.log("filters.hideCompleted is:", filters.hideCompleted);
       return todo.title
         .toLowerCase()
         .includes(filters.searchText.toLowerCase());
@@ -71,6 +78,7 @@ document.querySelector("#new-todo").addEventListener("submit", function (e) {
       title: e.target.elements.newTodoText.value,
       completed: false,
     });
+    localStorage.setItem("todos", JSON.stringify(todos));
   }
 
   renderTodos(todos, filters);

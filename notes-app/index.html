@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html lang="">
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Title Page</title>
-
-
-</head>
-
-<body>
-  <h1 class="text-center">Todos</h1>
-  <p>Clean the kitchen</p>
-  <p>Book flights</p>
-  <p>Research museums</p>
-  <p>Walk the dog</p>
-  <p>Finish this course</p>
-
-
-  <script src="index.js"></script>
-</body>
-
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <h1>Notes App</h1>
+        <h2>Take notes and never forget</h2>
+        <input id="search-text" type="text" placeholder="Filter notes">
+        <select id="filter-by">
+            <option value="byEdited">Sort by last edited</option>
+            <option value="byCreated">Sort by recently created</option>
+            <option value="alphabetical">Sort alphabetically</option>
+        </select>
+        <div id="notes"></div>
+        <button id="create-note">Create Note</button>      
+        <script src="notes-app.js"></script>
+    </body>
 </html>
