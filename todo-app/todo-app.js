@@ -14,14 +14,26 @@ document.querySelector("#search-text").addEventListener("input", function (e) {
 
 document.querySelector("#new-todo").addEventListener("submit", function (e) {
   e.preventDefault();
-  todos.push({
-    id: uuidv4(),
-    text: e.target.elements.text.value,
-    completed: false,
-  });
+  if (e.target.elements.text.value.length > 0) {
+    todos.push({
+      id: uuidv4(),
+      title: e.target.elements.text.value,
+      body: "",
+      completed: false,
+    });
+  } else {
+    todos.push({
+      id: uuidv4(),
+      title: "Untitled task",
+      body: "",
+      completed: false,
+    });
+  }
+
   saveTodos(todos);
   renderTodos(todos, filters);
   e.target.elements.text.value = "";
+  location.assign("/edit.html");
 });
 
 document

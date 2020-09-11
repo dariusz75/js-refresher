@@ -33,13 +33,14 @@ const removeTodo = function (id) {
 
   if (todoIndex > -1) {
     todos.splice(todoIndex, 1);
+    //renderTodos(todos, filters);
   }
 };
 
 // Render application todos based on filters
 const renderTodos = function (todos, filters) {
   const filteredTodos = todos.filter(function (todo) {
-    const searchTextMatch = todo.text
+    const searchTextMatch = todo.title
       .toLowerCase()
       .includes(filters.searchText.toLowerCase());
     const hideCompletedMatch = !filters.hideCompleted || !todo.completed;
@@ -65,7 +66,7 @@ const renderTodos = function (todos, filters) {
 const generateTodoDOM = function (todo) {
   const todoEl = document.createElement("div");
   const checkbox = document.createElement("input");
-  const todoText = document.createElement("span");
+  const todoTitle = document.createElement("a");
   const removeButton = document.createElement("button");
 
   // Setup todo checkbox
@@ -79,14 +80,16 @@ const generateTodoDOM = function (todo) {
   });
   todoEl.appendChild(checkbox);
 
-  // Setup the todo text
-  todoText.textContent = todo.text;
-  todoEl.appendChild(todoText);
+  // Setup the todo title
+  todoTitle.textContent = todo.title;
+  todoTitle.setAttribute("href", `/edit.html#${todo.id}`);
+  todoEl.appendChild(todoTitle);
 
   // Setup the remove button
   removeButton.textContent = "x";
   removeButton.addEventListener("click", function () {
     removeTodo(todo.id);
+    saveTodos(todos);
     renderTodos(todos, filters);
   });
 
