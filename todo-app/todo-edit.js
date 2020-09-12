@@ -1,4 +1,5 @@
 const taskTitleField = document.querySelector("#task-title");
+const lastEditiedDateEl = document.querySelector("#last-edited");
 const taskBodyField = document.querySelector("#task-body");
 const removeTodoButton = document.querySelector("#remove-todo");
 
@@ -12,15 +13,21 @@ if (todo === undefined) {
   location.assign("/index.html");
 }
 
+lastEditiedDateEl.textContent = lastEditedMessage(todo.updatedAt);
+
 taskTitleField.value = todo.title;
 taskTitleField.addEventListener("input", function (e) {
   todo.title = e.target.value;
+  todo.updatedAt = moment().valueOf();
   saveTodos(todos);
+  lastEditiedDateEl.textContent = lastEditedMessage(todo.updatedAt);
 });
 
 taskBodyField.value = todo.body;
 taskBodyField.addEventListener("input", function (e) {
   todo.body = e.target.value;
+  todo.updatedAt = moment().valueOf();
+  lastEditiedDateEl.textContent = lastEditedMessage(todo.updatedAt);
   saveTodos(todos);
 });
 

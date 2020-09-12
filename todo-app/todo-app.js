@@ -14,12 +14,17 @@ document.querySelector("#search-text").addEventListener("input", function (e) {
 
 document.querySelector("#new-todo").addEventListener("submit", function (e) {
   e.preventDefault();
+
+  const timestamp = moment().valueOf();
+
   if (e.target.elements.text.value.length > 0) {
     todos.push({
       id: uuidv4(),
       title: e.target.elements.text.value,
       body: "",
       completed: false,
+      createdAt: timestamp,
+      updatedAt: timestamp,
     });
   } else {
     todos.push({

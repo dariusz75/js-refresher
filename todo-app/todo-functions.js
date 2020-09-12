@@ -104,3 +104,9 @@ const generateSummaryDOM = function (incompleteTodos) {
   summary.textContent = `You have ${incompleteTodos.length} todos left`;
   return summary;
 };
+
+// Generate Last edited message
+
+const lastEditedMessage = function (timestamp) {
+  return `Last edited: ${moment(timestamp).fromNow()}`;
+};

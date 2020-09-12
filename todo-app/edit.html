@@ -9,6 +9,7 @@
   <body>
     <h1 class="text-center">Edit todo</h1>
     <input id="task-title" type="text" placeholder="Task title" />
+    <span id="last-edited"></span>
     <textarea
       id="task-body"
       cols="30"
@@ -16,6 +17,7 @@
       placeholder="Enter task details"
     ></textarea>
     <button id="remove-todo">Remove todo</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment-with-locales.min.js"></script>
     <script src="todo-functions.js"></script>
     <script src="todo-edit.js"></script>
   </body>
