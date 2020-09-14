@@ -37,8 +37,46 @@ const removeTodo = function (id) {
   }
 };
 
+// Sort todos with dropdown list by one of three options
+const sortTodos = function (todos, sortBy) {
+  if (sortBy === "byEdited") {
+    return todos.sort(function (a, b) {
+      if (a.updatedAt > b.updatedAt) {
+        return -1;
+      } else if (a.updatedAt < b.updatedAt) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else if (sortBy === "byCreated") {
+    return todos.sort(function (a, b) {
+      if (a.createdAt > b.createdAt) {
+        return -1;
+      } else if (a.createdAt < b.createdAt) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else if (sortBy === "alphabetical") {
+    return todos.sort(function (a, b) {
+      if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return -1;
+      } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else {
+    return todos;
+  }
+};
+
 // Render application todos based on filters
 const renderTodos = function (todos, filters) {
+  todos = sortTodos(todos, filters.sortBy);
   const filteredTodos = todos.filter(function (todo) {
     const searchTextMatch = todo.title
       .toLowerCase()

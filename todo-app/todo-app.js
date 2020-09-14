@@ -3,12 +3,18 @@ let todos = getSavedTodos();
 const filters = {
   searchText: "",
   hideCompleted: false,
+  sortBy: "byEdited",
 };
 
 renderTodos(todos, filters);
 
 document.querySelector("#search-text").addEventListener("input", function (e) {
   filters.searchText = e.target.value;
+  renderTodos(todos, filters);
+});
+
+document.querySelector("#filter-by").addEventListener("change", function (e) {
+  filters.sortBy = e.target.value;
   renderTodos(todos, filters);
 });
 
@@ -32,6 +38,8 @@ document.querySelector("#new-todo").addEventListener("submit", function (e) {
       title: "Untitled task",
       body: "",
       completed: false,
+      createdAt: timestamp,
+      updatedAt: timestamp,
     });
   }
 
