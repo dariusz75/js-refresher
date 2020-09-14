@@ -16,9 +16,7 @@ const saveTodos = (todos) => {
 
 //Toggle todo for completed/uncompleted
 const toggleTodo = (id) => {
-  const todo = todos.find((todo) => {
-    return todo.id === id;
-  });
+  const todo = todos.find((todo) => todo.id === id);
 
   if (todo !== undefined) {
     todo.completed = !todo.completed;
@@ -27,9 +25,7 @@ const toggleTodo = (id) => {
 
 //Remove todo from the list
 const removeTodo = (id) => {
-  const todoIndex = todos.findIndex((todo) => {
-    return todo.id === id;
-  });
+  const todoIndex = todos.findIndex((todo) => todo.id === id);
 
   if (todoIndex > -1) {
     todos.splice(todoIndex, 1);
@@ -86,9 +82,7 @@ const renderTodos = (todos, filters) => {
     return searchTextMatch && hideCompletedMatch;
   });
 
-  const incompleteTodos = filteredTodos.filter((todo) => {
-    return !todo.completed;
-  });
+  const incompleteTodos = filteredTodos.filter((todo) => !todo.completed);
 
   document.querySelector("#todos").innerHTML = "";
   document
@@ -145,6 +139,5 @@ const generateSummaryDOM = (incompleteTodos) => {
 
 // Generate Last edited message
 
-const lastEditedMessage = (timestamp) => {
-  return `Last edited: ${moment(timestamp).fromNow()}`;
-};
+const lastEditedMessage = (timestamp) =>
+  `Last edited: ${moment(timestamp).fromNow()}`;
