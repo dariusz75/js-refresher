@@ -16,7 +16,7 @@ const saveTodos = (todos) => {
 
 //Toggle todo for completed/uncompleted
 const toggleTodo = (id) => {
-  const todo = todos.find(function (todo) {
+  const todo = todos.find((todo) => {
     return todo.id === id;
   });
 
@@ -27,7 +27,7 @@ const toggleTodo = (id) => {
 
 //Remove todo from the list
 const removeTodo = (id) => {
-  const todoIndex = todos.findIndex(function (todo) {
+  const todoIndex = todos.findIndex((todo) => {
     return todo.id === id;
   });
 
@@ -40,7 +40,7 @@ const removeTodo = (id) => {
 // Sort todos with dropdown list by one of three options
 const sortTodos = (todos, sortBy) => {
   if (sortBy === "byEdited") {
-    return todos.sort(function (a, b) {
+    return todos.sort((a, b) => {
       if (a.updatedAt > b.updatedAt) {
         return -1;
       } else if (a.updatedAt < b.updatedAt) {
@@ -50,7 +50,7 @@ const sortTodos = (todos, sortBy) => {
       }
     });
   } else if (sortBy === "byCreated") {
-    return todos.sort(function (a, b) {
+    return todos.sort((a, b) => {
       if (a.createdAt > b.createdAt) {
         return -1;
       } else if (a.createdAt < b.createdAt) {
@@ -60,7 +60,7 @@ const sortTodos = (todos, sortBy) => {
       }
     });
   } else if (sortBy === "alphabetical") {
-    return todos.sort(function (a, b) {
+    return todos.sort((a, b) => {
       if (a.title.toLowerCase() < b.title.toLowerCase()) {
         return -1;
       } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
@@ -77,7 +77,7 @@ const sortTodos = (todos, sortBy) => {
 // Render application todos based on filters
 const renderTodos = (todos, filters) => {
   todos = sortTodos(todos, filters.sortBy);
-  const filteredTodos = todos.filter(function (todo) {
+  const filteredTodos = todos.filter((todo) => {
     const searchTextMatch = todo.title
       .toLowerCase()
       .includes(filters.searchText.toLowerCase());
@@ -86,7 +86,7 @@ const renderTodos = (todos, filters) => {
     return searchTextMatch && hideCompletedMatch;
   });
 
-  const incompleteTodos = filteredTodos.filter(function (todo) {
+  const incompleteTodos = filteredTodos.filter((todo) => {
     return !todo.completed;
   });
 
@@ -95,7 +95,7 @@ const renderTodos = (todos, filters) => {
     .querySelector("#todos")
     .appendChild(generateSummaryDOM(incompleteTodos));
 
-  filteredTodos.forEach(function (todo) {
+  filteredTodos.forEach((todo) => {
     document.querySelector("#todos").appendChild(generateTodoDOM(todo));
   });
 };
@@ -110,7 +110,7 @@ const generateTodoDOM = (todo) => {
   // Setup todo checkbox
   checkbox.setAttribute("type", "checkbox");
   checkbox.checked = todo.completed;
-  checkbox.addEventListener("change", function () {
+  checkbox.addEventListener("change", () => {
     toggleTodo(todo.id);
     saveTodos(todos);
     renderTodos(todos, filters);
@@ -125,7 +125,7 @@ const generateTodoDOM = (todo) => {
 
   // Setup the remove button
   removeButton.textContent = "x";
-  removeButton.addEventListener("click", function () {
+  removeButton.addEventListener("click", () => {
     removeTodo(todo.id);
     saveTodos(todos);
     renderTodos(todos, filters);
