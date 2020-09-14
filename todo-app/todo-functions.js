@@ -1,5 +1,5 @@
 // Fetch existing todos from localStorage
-const getSavedTodos = function () {
+const getSavedTodos = () => {
   const todosJSON = localStorage.getItem("todos");
 
   if (todosJSON !== null) {
@@ -10,12 +10,12 @@ const getSavedTodos = function () {
 };
 
 // Save todos to localStorage
-const saveTodos = function (todos) {
+const saveTodos = (todos) => {
   localStorage.setItem("todos", JSON.stringify(todos));
 };
 
 //Toggle todo for completed/uncompleted
-const toggleTodo = function (id) {
+const toggleTodo = (id) => {
   const todo = todos.find(function (todo) {
     return todo.id === id;
   });
@@ -26,7 +26,7 @@ const toggleTodo = function (id) {
 };
 
 //Remove todo from the list
-const removeTodo = function (id) {
+const removeTodo = (id) => {
   const todoIndex = todos.findIndex(function (todo) {
     return todo.id === id;
   });
@@ -38,7 +38,7 @@ const removeTodo = function (id) {
 };
 
 // Sort todos with dropdown list by one of three options
-const sortTodos = function (todos, sortBy) {
+const sortTodos = (todos, sortBy) => {
   if (sortBy === "byEdited") {
     return todos.sort(function (a, b) {
       if (a.updatedAt > b.updatedAt) {
@@ -75,7 +75,7 @@ const sortTodos = function (todos, sortBy) {
 };
 
 // Render application todos based on filters
-const renderTodos = function (todos, filters) {
+const renderTodos = (todos, filters) => {
   todos = sortTodos(todos, filters.sortBy);
   const filteredTodos = todos.filter(function (todo) {
     const searchTextMatch = todo.title
@@ -101,7 +101,7 @@ const renderTodos = function (todos, filters) {
 };
 
 // Get the DOM elements for an individual note
-const generateTodoDOM = function (todo) {
+const generateTodoDOM = (todo) => {
   const todoEl = document.createElement("div");
   const checkbox = document.createElement("input");
   const todoTitle = document.createElement("a");
@@ -137,7 +137,7 @@ const generateTodoDOM = function (todo) {
 };
 
 // Get the DOM elements for list summary
-const generateSummaryDOM = function (incompleteTodos) {
+const generateSummaryDOM = (incompleteTodos) => {
   const summary = document.createElement("h2");
   summary.textContent = `You have ${incompleteTodos.length} todos left`;
   return summary;
@@ -145,6 +145,6 @@ const generateSummaryDOM = function (incompleteTodos) {
 
 // Generate Last edited message
 
-const lastEditedMessage = function (timestamp) {
+const lastEditedMessage = (timestamp) => {
   return `Last edited: ${moment(timestamp).fromNow()}`;
 };
